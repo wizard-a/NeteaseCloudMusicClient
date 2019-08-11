@@ -1,6 +1,7 @@
 import { connect } from 'dva';
 import React, { Component } from 'react';
 import { Audio, Menu } from '@/components';
+import Personalize from './main/personalize';
 // import yay from '@/assets/yay.jpg';
 
 interface IIndexProps {
@@ -13,9 +14,7 @@ export default class Index extends Component<IIndexProps> {
   render() {
     return (
       <div style={{ textAlign: 'center' }}>
-        <Menu />
-        {/* <Audio src='https://music.163.com/song/media/outer/url?id=33894312.mp3' controls /> */}
-        {/* <img src={yay} /> */}
+        <Personalize />
       </div>
     );
   }
