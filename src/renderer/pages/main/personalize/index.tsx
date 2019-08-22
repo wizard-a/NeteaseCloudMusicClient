@@ -39,7 +39,7 @@ class Personalize extends React.Component<IPersonalizeProps, IPersonalizeState> 
         const { data } = this.props;
         return (
             <div className={styles.container}>
-                {data.map(item => {
+                {data && data.map(item => {
                     return <Item
                         key={item.id}
                         name={item.name}

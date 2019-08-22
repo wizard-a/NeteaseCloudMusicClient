@@ -9,7 +9,8 @@ interface IIndexProps {
 }
 @connect(global => global)
 export default class Index extends Component<IIndexProps> {
-  static defaultProps: IIndexProps = {};
+  static defaultProps = {
+  };
 
   render() {
     return (
