@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { Menu, SplitPanel } from '@/components';
 import { MenuItem } from '@/models/menu';
 import { connect } from 'dva';
+import Header from '../header';
 import styles from './content.less';
 
 export interface IHeaderProps {
@@ -33,11 +34,14 @@ class Content extends React.Component<IHeaderProps, IHeaderState> {
           defaultSize={200}
           maxSize={250}
           minSize={180}
+          resizerStyle={{marginTop: '50px '}}
         >
           <div className={styles.left}>
+            <Header.Top />
             <Menu data={menuData} />
           </div>
           <div className={styles.children}>
+            <Header />
             {children}
           </div>
         </SplitPanel>

@@ -14,7 +14,7 @@ export default class Index extends Component<IIndexProps> {
 
   render() {
     return (
-      <div style={{ textAlign: 'center' }}>
+      <div>
         <Personalize />
       </div>
     );

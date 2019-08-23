@@ -1,5 +1,29 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+
+    padding: 0px 30px;
+    max-width: 840px;
+    min-width: 760px;
+    margin: auto;
+
+    .item {
+        margin-top: 15px;
+        .title {
+            cursor: pointer;
+            font-size: 16px;
+            color: #363636;
+            margin-bottom: 15px;
+            &:hover {
+                color: #000;
+            }
+
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
 }

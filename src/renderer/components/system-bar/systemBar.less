@@ -1,0 +1,99 @@
+
+.macBar {
+
+    &:hover{
+    	.macBtn i{
+    		opacity: 1!important;
+    	}
+    }
+    .first {
+        margin-left: 0px;
+    }
+    .macBtn {
+        position: relative;
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-left: 7px;
+
+        i{
+            position: absolute;
+            top: 0;
+            // left: 0.5px;
+            opacity: 0;
+            font-size: 12px!important;
+            cursor: default!important;
+            &:hover{
+                opacity: 1;
+            }
+        }
+
+        &-close{
+            i{
+                color: #4c0102!important;
+            }
+            background-color: #f96361;
+        }
+
+        &-min{
+            i{
+                color: #985712!important;
+            }
+            background-color: #fbbb4d;
+        }
+        &-max{
+            i{
+                color: #0a630c!important;
+            }
+            background-color: #3eca52;
+        }
+    }
+}
+
+.winBar {
+    .winBtn {
+        position: relative;
+        display: inline-block;
+        width: 36px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        overflow: hidden;
+
+        i{
+            font-size: 12px!important;
+            cursor: default!important;
+            color: #8e8f90!important;
+        }
+
+        &-close:hover {
+            background-color: #f74c31;
+            i{
+                color: #fff!important;
+            }
+        }
+        &-min:hover{
+            background-color: #eee;
+        }
+        &-max:hover{
+            background-color: #eee;
+        }
+    }
+}
+
+// :global{
+//     .winBarRight{
+//         z-index: 1000;
+//         position: absolute;
+//         right: 0;
+//         top: 0;
+//     }
+//     .winBarSideBar{
+//         z-index: 1000;
+//         position: absolute;
+//         right: 350px;
+//         top: 0;
+//     }
+// }

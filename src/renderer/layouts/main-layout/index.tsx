@@ -20,6 +20,8 @@ export interface IMainLayoutState {
 // @connect()
 @withElectron
 class MainLayout extends React.Component<IMainLayoutProps, IMainLayoutState> {
+
+    mainRef: React.RefObject<HTMLDivElement>;
     constructor(props: IMainLayoutProps) {
         super(props);
         this.mainRef = React.createRef();
@@ -72,7 +74,7 @@ class MainLayout extends React.Component<IMainLayoutProps, IMainLayoutState> {
         const classNames = classnames(styles.main, className);
         return (
             <div id='main' ref={this.mainRef} className={classNames}>
-                <Header />
+                {/* <Header /> */}
                 <Content>
                     {children}
                 </Content>

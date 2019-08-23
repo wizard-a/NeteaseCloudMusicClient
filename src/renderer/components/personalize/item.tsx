@@ -27,7 +27,7 @@ export default class Item extends React.Component<IItemProps, IItemState> {
         return (
             <div className={classNames}>
                 <img className={styles.img} src={picUrl} />
-                <div>{name}</div>
+                <div className={styles.name}>{name}</div>
             </div>
         );
     }

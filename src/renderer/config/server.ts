@@ -1,7 +1,7 @@
 
 
 const config = {
-    SERVER_URL: 'http://localhost:3000',
+    SERVER_URL: 'http://jiechud.site:3000',
 };
 
 export const getURL = () => {

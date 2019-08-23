@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import {Menu} from '@/components';
 import {connect} from 'dva';
 import {MenuItem} from '@/models/menu';
+import Top from './top';
 import styles from './header.less';
 
 export interface IHeaderProps {
@@ -16,6 +17,7 @@ export interface IHeaderState {
   currMenu: menu.currMenu,
 }))
 class Header extends React.Component<IHeaderProps, IHeaderState> {
+  static Top = Top;
   constructor(props: IHeaderProps) {
     super(props);
 
