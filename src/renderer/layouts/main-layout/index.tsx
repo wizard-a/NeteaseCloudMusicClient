@@ -2,13 +2,14 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { withElectron } from '@/components/hight-order';
 import { Menu} from '@/components';
+import { IRedux } from '@/schema/redux';
 import Header from './header';
 import Footer from './footer';
 import Content from './content';
 import { connect } from 'dva';
 import styles from './index.less';
 
-export interface IMainLayoutProps {
+export interface IMainLayoutProps extends IRedux {
     className?: string;
     electron: any;
 }
@@ -17,7 +18,7 @@ export interface IMainLayoutState {
 }
 
 
-// @connect()
+@connect()
 @withElectron
 class MainLayout extends React.Component<IMainLayoutProps, IMainLayoutState> {
 
@@ -30,6 +31,10 @@ class MainLayout extends React.Component<IMainLayoutProps, IMainLayoutState> {
     }
 
     componentDidMount() {
+        // 初始数据
+        this.props.dispatch({
+            type: 'global/init',
+        });
         this.bindResizeEvent();
     }
 

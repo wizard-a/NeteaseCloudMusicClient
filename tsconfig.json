@@ -20,11 +20,15 @@
     "strictPropertyInitialization": false,
     "noEmit": false,
     "paths": {
-      "*": ["node_modules/*"]
+      "*": ["node_modules/*"],
+      "@/*": ["./*"]
     },
   },
+  "exclude": [
+    "src/renderer/*"
+  ],
   "include": [
-    "src/**/*"
+    "src/**/*", "src/typings.d.ts"
   ],
   "extends": "./node_modules/electron-webpack/tsconfig-base.json"
 }

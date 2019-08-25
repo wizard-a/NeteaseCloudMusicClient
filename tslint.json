@@ -22,7 +22,9 @@
     "no-namespace": false,
     "ban-types": false,
     "no-empty": false,
-    "member-access": false
+    "member-access": false,
+    "eofline":false,
+    "arrow-parens":false
   },
   "jsRules": {
     "max-line-length": {

@@ -28,7 +28,7 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
         {
           data && data.map(item => {
             if (item.type === 'menu') {
-              return <Item key={item.name} name={item.name} icon={item.icon} />;
+              return <Item key={item.name} name={item.name} icon={item.icon} url={item.url} />;
             }
             return <Label key={item.name} name={item.name} />;
           })

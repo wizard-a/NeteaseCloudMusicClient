@@ -1,55 +1,35 @@
 import { app, BrowserWindow } from 'electron';
-import path from 'path';
-import url from 'url';
-const contextMenu = require('electron-context-menu');
+import { join as pathJoin } from 'path';
+import { format as urlFormat } from 'url';
+import * as ipcMain from './ipcMain';
 
 let mainWindow: Electron.BrowserWindow | null;
 
 
-
-contextMenu({
-  prepend: (defaultActions, params, browserWindow) => [
-    {
-      label: 'Rainbow',
-      // Only show it when right-clicking images
-      visible: params.mediaType === 'image',
-      click: () => {
-        console.log('params', params);
-      },
-    },
-    {
-      label: 'Search Google for “{selection}”',
-      // Only show it when right-clicking text
-      visible: params.selectionText.trim().length > 0,
-      click: () => {
-        // shell.openExternal(`https://google.com/search?q=${encodeURIComponent(params.selectionText)}`);
-      },
-    },
-  ],
-  showLookUpSelection: false,
-});
-
 function createWindow() {
+  const preloadFile = pathJoin(__dirname, './preload.js');
   mainWindow = new BrowserWindow({
-    height: 600,
+    frame: false,
     webPreferences: {
       nodeIntegration: false,
+      preload: preloadFile,
       nodeIntegrationInWorker: false,
     },
-    width: 800,
+    height: 670,
+    width: 1000,
+    minWidth: 1000,
+    minHeight: 670,
   });
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.loadURL('http://localhost:8000/#/');
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadURL('http://localhost:8001/#/');
   } else {
-    mainWindow.loadURL(
-      url.format({
-        pathname: path.join(__dirname, './dist/renderer/index.html'),
-        protocol: 'file:',
-        slashes: true,
-      })
-    );
+    const url = urlFormat({
+      pathname: pathJoin(__dirname, '../renderer/index.html'),
+      protocol: 'file:',
+      slashes: true,
+    });
+    mainWindow.loadURL(url);
   }
 
   mainWindow.on('closed', () => {
@@ -57,7 +37,15 @@ function createWindow() {
   });
 }
 
-app.on('ready', createWindow);
+
+function initApp() {
+  // 初始化主进程
+  ipcMain.init();
+  // 创建主窗口
+  createWindow();
+}
+
+app.on('ready', initApp);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -70,3 +58,9 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+
+
+export function  getMainWindow(): BrowserWindow | null {
+  return mainWindow;
+}

@@ -1,7 +1,7 @@
 import { connect } from 'dva';
 import React, { Component } from 'react';
 import { Audio, Menu } from '@/components';
-import Personalize from './main/personalize';
+import Personalize from './main/components/personalize';
 // import yay from '@/assets/yay.jpg';
 
 interface IIndexProps {

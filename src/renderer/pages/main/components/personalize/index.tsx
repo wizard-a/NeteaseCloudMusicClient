@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { IRedux } from '@/schema/redux';
 import { Item } from '@/components/personalize';
 import { Icon } from 'antd';
+import { router } from 'umi';
 import styles from './personalize.less';
 
 
@@ -36,6 +37,14 @@ class Personalize extends React.Component<IPersonalizeProps, IPersonalizeState> 
         });
     }
 
+    handleClick = (item) => {
+        this.props.dispatch({
+            type: 'playList/queryPlayList',
+            payload: item.id,
+        });
+        router.push(`/main/playList/${item.id}`);
+    }
+
     renderItem = (data, rowCount = 5) => {
         const remainder = data.length % rowCount;
         const rowData = [];
@@ -43,7 +52,6 @@ class Personalize extends React.Component<IPersonalizeProps, IPersonalizeState> 
         for (let i = 0; i < rows; i++) {
             rowData.push(data.slice(i * rowCount, (i + 1) * rowCount));
         }
-        console.log('rowData', data, rowData, remainder);
         return <React.Fragment>
             {
                 rowData.map((currRow) => {
@@ -55,6 +63,7 @@ class Personalize extends React.Component<IPersonalizeProps, IPersonalizeState> 
                                 id={item.id}
                                 picUrl={item.picUrl}
                                 playCount={item.playCount}
+                                onClick={this.handleClick}
                             />;
                         })}
                     </div>;

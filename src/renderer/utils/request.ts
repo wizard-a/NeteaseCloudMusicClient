@@ -56,7 +56,7 @@ request.interceptors.response.use((response) => {
   if (response.status === 200) {
     return response.json().then(res => {
       if (res.code === 200) {
-        return res.result;
+        return res;
       }
       // console.log('res', res);
     });

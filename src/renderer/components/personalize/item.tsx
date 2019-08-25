@@ -8,24 +8,34 @@ export interface IItemProps {
     name: string;
     picUrl: string;
     playCount: number;
+    onClick?: (param: Object) => void;
 }
 
 export interface IItemState {
 }
 
 export default class Item extends React.Component<IItemProps, IItemState> {
+    static defaultProps = {
+        onClick: () => {},
+      };
+
     constructor(props: IItemProps) {
         super(props);
 
         this.state = {
-        }
+        };
+    }
+
+    handleClick = (e) => {
+        const {id, name, onClick} = this.props;
+        onClick({id, name});
     }
 
     public render() {
         const {className, picUrl, name} = this.props;
         const classNames = classnames(styles.item, className);
         return (
-            <div className={classNames}>
+            <div onClick={this.handleClick} className={classNames}>
                 <img className={styles.img} src={picUrl} />
                 <div className={styles.name}>{name}</div>
             </div>

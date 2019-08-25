@@ -12,8 +12,6 @@ export interface ISystemBarHeaderProps {
 export interface ISystemBarHeaderState {
 }
 
-window.electron = {};
-
 export default class SystemBarHeader extends React.Component<ISystemBarHeaderProps, ISystemBarHeaderState> {
     constructor(props: ISystemBarHeaderProps) {
         super(props);
@@ -29,7 +27,7 @@ export default class SystemBarHeader extends React.Component<ISystemBarHeaderPro
     }
 
     onMax = () => {
-        window.electron.min();
+        window.electron.max();
     }
 
     public render() {

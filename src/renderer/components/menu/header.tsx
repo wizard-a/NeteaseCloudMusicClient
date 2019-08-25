@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {MenuItemHeader} from '@/models/menu';
+import {router} from 'umi';
 import styles from './menu.less';
 
 
@@ -15,7 +16,11 @@ class HeaderMenu extends React.Component<IHeaderMenuProps, IHeaderMenuState> {
         super(props);
 
         this.state = {
-        }
+        };
+    }
+
+    handleClick = (item) => {
+        router.push(item.url);
     }
 
     public render() {
@@ -24,7 +29,10 @@ class HeaderMenu extends React.Component<IHeaderMenuProps, IHeaderMenuState> {
             <div className={styles.headerMenu}>
                 {
                     data.map(item => {
-                       return <span className={styles.headerMenuItem} key={item.name}>{item.name}</span>;
+                       return <span
+                        onClick={() => this.handleClick(item)}
+                        className={styles.headerMenuItem}
+                        key={item.name}>{item.name}</span>;
                     })
                 }
             </div>

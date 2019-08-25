@@ -29,10 +29,10 @@ const PersonalizeModel: PersonalizeModelType = {
     effects: {
         *personalizeList(_, { call, put }) {
             const response = yield call(queryPersonalizeList);
-            if (response.length > 0) {
+            if (response.result.length > 0) {
                 yield put({
                     type: 'savePersonalizeList',
-                    payload: response.slice(0, 10),
+                    payload: response.result.slice(0, 10),
                   });
             }
         },

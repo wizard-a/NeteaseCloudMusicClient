@@ -4,8 +4,8 @@ import { Reducer } from 'redux';
 import { queryCurrent, query as queryUsers } from '@/services/user';
 
 const menuData = [
-    {icon: 'icon-main', name: '发现音乐', url: '', type: 'menu', headerMenu: [
-        {name: '个性推荐', url: ''},
+    {icon: 'icon-main', name: '发现音乐', url: '/', type: 'menu', headerMenu: [
+        {name: '个性推荐', url: '/'},
         {name: '歌单', url: ''},
         {name: '主播电台', url: ''},
         {name: '排行旁', url: ''},

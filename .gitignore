@@ -2,3 +2,5 @@ node_modules
 dist
 src/renderer/pages/.umi
 release
+yarn-error.log
+ .DS_Store

@@ -1,0 +1,53 @@
+.container {
+    flex: 1;
+    overflow: auto;
+    .header {
+        display: flex;
+        align-items: center;
+        .banner {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        .content {
+            .title {
+                display: flex;
+                align-items: center;
+                .playName {
+                    border: 1px solid #db9089;
+                    border-radius: 2px;
+                    color: #c3463a;
+                    font-size: 12px;
+                    height: 18px;
+                    padding: 0px 3px;
+                    margin-right: 10px;
+                }
+
+                .name {
+                    font-size: 20px;
+                    color: 333333;
+                }
+            }
+
+            .baseInfo {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+                img {
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                }
+                .link {
+                    color: #597cab;
+                    margin-left: 8px;
+                    margin-right: 10px;
+                }
+                .time {
+                    color: #666666;
+                }
+            }
+        }
+    }
+}

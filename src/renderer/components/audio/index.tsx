@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import Icon from '../icon';
 import { Avatar } from 'antd';
-import {getTimeStrBySeconds} from '@/utils/time';
+import { getTimeStrBySeconds } from '@/utils/time';
 import styles from './audio.less';
 
 export interface AudioProps {
@@ -14,6 +14,28 @@ export interface AudioProps {
   controls?: boolean;
 
   autoPlay?: boolean;
+  /**
+   * 歌名
+   */
+  name?: string;
+  /**
+   * 歌手名
+   */
+  songName?: string;
+
+  /**
+   * 歌背景图
+   */
+  songBg?: string;
+  /**
+   * 下一首
+   */
+  onNext?: () => void;
+
+  /**
+   * 上一首
+   */
+  onUp?: () => void;
 }
 
 export interface AudioState {
@@ -34,22 +56,31 @@ export interface AudioState {
 
 let interval = null;
 
+const initState = {
+  isRound: false,
+  isPlay: false,
+  progress: 0,
+  duration: '00:00',
+  dotDrag: false,
+};
+
 class Audio extends Component<AudioProps, AudioState> {
 
   audio: React.RefObject<HTMLAudioElement>;
   slider: React.RefObject<HTMLDivElement>;
   dotDart: boolean;
+
+  static defaultProps = {
+    autoPlay: false,
+    onNext: () => { },
+    onUp: () => { }
+  }
+
   constructor(props: AudioProps) {
     super(props);
     this.audio = React.createRef();
     this.slider = React.createRef();
-    this.state = {
-      isRound: false,
-      isPlay: false,
-      progress: 0,
-      duration: '00:00',
-      dotDrag: false,
-    };
+    this.state = initState;
   }
 
   // static defaultProps: AudioProps = {
@@ -60,22 +91,41 @@ class Audio extends Component<AudioProps, AudioState> {
     // console.log(this.audio.current.play());
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.src && newProps.src !== this.props.src) {
+      console.log('newProps.src', newProps.src);
+      this.changeUrl(newProps.src);
+    }
+  }
+
   changeUrl = (src: string) => {
     this.audio.current.src = src;
-    this.play();
+    this.setState({ ...initState });
+    // setTimeout(() => {
+    //   this.play();
+    // }, 0);
   }
 
   play = () => {
-    this.setState({
-      isPlay: true,
-      duration: getTimeStrBySeconds(this.getDuration()),
-    });
-    this.audio.current.play();
-    this.beginInterval();
+    const playPromise = this.audio.current.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          this.setState({
+            isPlay: true,
+            duration: getTimeStrBySeconds(this.getDuration()),
+          });
+          // console.log("audio played auto");
+          this.beginInterval();
+        })
+        .catch(() => {
+          // console.log("playback prevented");
+        });
+    }
   }
 
   getDuration = () => {
-   return parseInt(this.audio.current.duration.toString(), 10);
+    return parseInt(this.audio.current.duration.toString(), 10);
   }
 
   updateProgress = () => {
@@ -95,14 +145,14 @@ class Audio extends Component<AudioProps, AudioState> {
   /**
    * 获取播放进度
    */
-  getProgress = () =>  {
+  getProgress = () => {
     const audio = this.audio.current;
     if (!audio.duration) {
       return 1;
     }
     // console.log('aaaaaa', audio.currentTime, audio.duration);
     const progress = (audio.currentTime / audio.duration) * 100;
-    return progress > 1 ? progress : 1 ;
+    return progress > 1 ? progress : 1;
   }
 
   pause = () => {
@@ -195,7 +245,7 @@ class Audio extends Component<AudioProps, AudioState> {
   }
 
   handleDotMouseDown = () => {
-      this.dotDart = true;
+    this.dotDart = true;
   }
 
   handleMouseMove = (e: React.MouseEvent) => {
@@ -211,10 +261,32 @@ class Audio extends Component<AudioProps, AudioState> {
     }
   }
 
+  handleCanPlay = () => {
+    console.log('---play---')
+    this.play();
+  }
+
+  /**
+   * 当前音乐播放完毕
+   */
+  handleEnded = () => {
+    this.handleNext();
+  }
+
+  /** 上一首 */
+  handleUp = () => {
+    this.props.onUp();
+  }
+
+  /** 下一首 */
+  handleNext = () => {
+    this.props.onNext();
+  }
+
   render() {
 
-    const {src, controls, autoPlay, className} = this.props;
-    const {isRound, isPlay, progress, duration} = this.state;
+    const { src, controls, autoPlay, className, name, songName, songBg } = this.props;
+    const { isRound, isPlay, progress, duration } = this.state;
     // console.log('isplay', isPlay, src, currTime);
     const classNames = classnames(styles.audio, className);
     const currTimeStr = getTimeStrBySeconds(this.getCurrTime());
@@ -230,21 +302,24 @@ class Audio extends Component<AudioProps, AudioState> {
           onClick={this.handleSliderClick}
         >
           <div className={styles.wrapper} />
-          <div style={{width: `${progress || 0}%`}} className={styles.progress} />
+          <div style={{ width: `${progress || 0}%` }} className={styles.progress} />
           {
-            isRound &&  <div
+            isRound && <div
               onMouseDown={this.handleDotMouseDown}
-              style={{marginLeft: `${progress || 0}%`}}
+              style={{ marginLeft: `${progress || 0}%` }}
               className={styles.round} />
           }
         </div>
 
         <div className={styles.info}>
-          <Avatar shape='square' size={40} icon='user' />
+          {songBg ?
+            <Avatar shape='square' src={songBg} size={40} /> :
+            <Avatar shape='square' size={40} icon='user' />}
+
           <div className={styles.title}>
             <div className={styles.top}>
-              <span className={styles.name}>我们俩</span>
-              <span className={styles.singer}> - 郭顶</span></div>
+              <span className={styles.name}>{name}</span>
+              <span className={styles.singer}> - {songName}</span></div>
             <div className={styles.bottom}>
               <span>{currTimeStr} / {duration}</span>
             </div>
@@ -252,21 +327,22 @@ class Audio extends Component<AudioProps, AudioState> {
         </div>
         <div className={styles.toolbar}>
           <Icon type='icon-love-b' />
-          <Icon style={{color: '#c3463a'}} type='icon-sound-up' />
+          <Icon onClick={this.handleUp} style={{ color: '#c3463a' }} type='icon-sound-up' />
           <div className={styles.round}>
             <Icon onClick={this.handlePlayOrStop} type={`${isPlay ? 'icon-stop' : 'icon-play'}`} />
           </div>
-          <Icon style={{color: '#c3463a'}} type='icon-sound-next' />
+          <Icon onClick={this.handleNext} style={{ color: '#c3463a' }} type='icon-sound-next' />
           <Icon type='icon-share' />
         </div>
         <div className={styles.controls}>
           <div className={styles.content}>
             <Icon type='icon-random' />
+            <Icon type='icon-play-list' />
             <Icon type='icon-word' />
             <Icon type='icon-volume' />
           </div>
         </div>
-        <audio ref={this.audio} autoPlay={autoPlay} src={src}>
+        <audio ref={this.audio} onEnded={this.handleEnded} onCanPlay={this.handleCanPlay} autoPlay={autoPlay} src={src}>
           您的浏览器不支持audio
         </audio>
       </div>

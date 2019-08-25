@@ -24,6 +24,8 @@
     "start": "npm run build-main-dev && electron ./dist/main/main.js",
     "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
     "pack": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
+    "pack:main": "npm run build-main-prod && electron-builder --dir",
+    "pack:renderer": "npm run build:renderer && electron-builder --dir",
     "dev:main": "electron-webpack dev",
     "dev:renderer": "APP_ROOT=src/renderer umi dev",
     "build-main-prod": "NODE_ENV=production webpack --config ./build/webpack.main.prod.config.js",
@@ -48,7 +50,7 @@
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
     "concurrently": "^3.5.1",
-    "electron": "^6.0.0",
+    "electron": "^5.0.2",
     "electron-builder": "^20.38.5",
     "electron-debug": "^2.1.0",
     "electron-webpack": "^2.6.2",
@@ -72,7 +74,9 @@
   },
   "electronWebpack": {
     "main": {
-      "sourceDirectory": "src/main"
+      "sourceDirectory": "src/main",
+      "webpackConfig": "build/webpack.base.config.js",
+      "extraEntries": ["./src/main/preload.ts"]
     },
     "renderer": {
       "sourceDirectory": null

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import {Icon} from '@/components';
+import {router} from 'umi';
 import styles from './menu.less';
 
 
@@ -9,6 +10,7 @@ export interface IItemProps {
     active?: string;
     icon?: string;
     name?: string;
+    url?: string;
 }
 
 export interface IItemState {
@@ -42,8 +44,12 @@ class Item extends React.Component<IItemProps, IItemState> {
         });
     }
 
+    handleClick = () => {
+        router.push(this.props.url);
+    }
+
     public render() {
-        const { className, icon, name, active } = this.props;
+        const { className, icon, name, active , url} = this.props;
         const { isHover } = this.state;
         const classNames = classnames(styles.item, className, {
             [styles.active]: active,
@@ -54,6 +60,7 @@ class Item extends React.Component<IItemProps, IItemState> {
                 className={classNames}
                 onMouseEnter={this.handleMouseDown}
                 onMouseLeave={this.handleMouseUp}
+                onClick={this.handleClick}
             >
                 <Icon style={iconStyle} type={icon} />
                 {name}

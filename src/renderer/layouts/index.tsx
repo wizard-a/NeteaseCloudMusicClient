@@ -16,7 +16,6 @@ interface Props {
 const Layout: React.SFC<Props> = (props) => {
     const { location: { pathname }, children } = props;
     let content = null;
-    console.log('render')
     if (pathname.startsWith('/electron') ) {
         content = (
             <React.Fragment>
