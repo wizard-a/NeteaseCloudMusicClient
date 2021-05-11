@@ -5480,10 +5480,10 @@ electron-webpack@^2.6.2:
     webpack-merge "^4.2.1"
     yargs "^13.2.4"
 
-electron@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npm.taobao.org/electron/download/electron-6.0.0.tgz#03712d461ac73cdf920b2336d6560d6c6b7f19cc"
-  integrity sha1-A3EtRhrHPN+SCyM21lYNbGt/Gcw=
+electron@^5.0.2:
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-5.0.13.tgz#81d44f2078fb13d306279cf3854d3734f2c390b4"
+  integrity sha512-AM73AMZpb/5zm8eIXsIcp2eMdniD5WO+FqMtlIzhhtSjixflDm0pLtgudz0fHtiT/w6V+6YcpDVb4TtHtrJbHQ==
   dependencies:
     "@types/node" "^10.12.18"
     electron-download "^4.1.0"
@@ -7487,11 +7487,9 @@ hoopy@^0.1.4:
   integrity sha1-YJIH1mEQADOpqUAq096mdzgcGx0=
 
 hosted-git-info@^2.1.4, hosted-git-info@^2.7.1:
-  version "2.8.2"
-  resolved "https://registry.npm.taobao.org/hosted-git-info/download/hosted-git-info-2.8.2.tgz#a35c3f355ac1249f1093c0c2a542ace8818c171a"
-  integrity sha1-o1w/NVrBJJ8Qk8DCpUKs6IGMFxo=
-  dependencies:
-    lru-cache "^5.1.1"
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
+  integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -12730,19 +12728,6 @@ rc-select@~9.2.0:
     react-lifecycles-compat "^3.0.2"
     warning "^4.0.2"
 
-rc-slider@^8.6.13, rc-slider@~8.6.11:
-  version "8.6.13"
-  resolved "https://registry.npm.taobao.org/rc-slider/download/rc-slider-8.6.13.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-slider%2Fdownload%2Frc-slider-8.6.13.tgz#88a8150c2dda6709f3f119135de11fba80af765b"
-  integrity sha1-iKgVDC3aZwnz8RkTXeEfuoCvdls=
-  dependencies:
-    babel-runtime "6.x"
-    classnames "^2.2.5"
-    prop-types "^15.5.4"
-    rc-tooltip "^3.7.0"
-    rc-util "^4.0.4"
-    shallowequal "^1.0.1"
-    warning "^4.0.3"
-
 rc-slider@~8.2.0:
   version "8.2.0"
   resolved "https://registry.npm.taobao.org/rc-slider/download/rc-slider-8.2.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-slider%2Fdownload%2Frc-slider-8.2.0.tgz#ae37d17144cad60e1da6eac0ee4ffcfea0b0a6e8"
@@ -12755,6 +12740,19 @@ rc-slider@~8.2.0:
     rc-util "^4.0.4"
     shallowequal "^1.0.1"
     warning "^3.0.0"
+
+rc-slider@~8.6.11:
+  version "8.6.13"
+  resolved "https://registry.npm.taobao.org/rc-slider/download/rc-slider-8.6.13.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-slider%2Fdownload%2Frc-slider-8.6.13.tgz#88a8150c2dda6709f3f119135de11fba80af765b"
+  integrity sha1-iKgVDC3aZwnz8RkTXeEfuoCvdls=
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.5"
+    prop-types "^15.5.4"
+    rc-tooltip "^3.7.0"
+    rc-util "^4.0.4"
+    shallowequal "^1.0.1"
+    warning "^4.0.3"
 
 rc-steps@~3.4.1:
   version "3.4.1"
